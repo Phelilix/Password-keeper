@@ -2,42 +2,118 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title ng-bind="title"></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="bower_components/toastr/toastr.css" rel="stylesheet" />
+    
+    <link href="content/customtheme.css" rel="stylesheet">
+    <link href="content/styles.css" rel="stylesheet" />
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
-
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+    <div>
+        <div ng-include="'layout/shell.html'"></div>
+        <div id="splash-page" ng-show="false">
+            <div class="page-splash">
+                <div class="page-splash-message">
+                    Angular Modular Demo
+                </div>
+                <div class="progress progress-striped active page-progress-bar">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div ng-view></div>
+    <!-- inject-vendor:js -->
+    <script>window.$ = window.jQuery = require('jquery')</script>
+    <script>window.toastr = require('toastr')</script>
+    <script>window.moment = require('moment')</script>
+    
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <!--<script src="bower_components/angular-animate/angular-animate.js"></script>-->
+    <script src="../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <!-- endinject -->
 
-  <div>Angular seed app: v<span app-version></span></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
+    <!-- inject:js -->
+    <!-- Bootstrapping -->
+    <script src="app.js"></script>
+
+    <!-- Reusable Blocks/Modules -->
+    <script src="blocks/exception/exception.module.js"></script>
+    <script src="blocks/exception/exception-handler.provider.js"></script>
+    <script src="blocks/exception/exception.js"></script>
+    <script src="blocks/logger/logger.module.js"></script>
+    <script src="blocks/logger/logger.js"></script>
+    <script src="blocks/router/router.module.js"></script>
+    <script src="blocks/router/routehelper.js"></script>
+
+    <!-- core module -->
+    <script src="core/core.module.js"></script>
+    <script src="core/constants.js"></script>
+    <script src="core/config.js"></script>
+    <script src="core/dataservice.js"></script>
+
+    <!-- layout -->
+    <script src="layout/layout.module.js"></script>
+    <script src="layout/shell.js"></script>
+    <script src="layout/sidebar.js"></script>
+
+    <!--widgets-->
+    <script src="widgets/widgets.module.js"></script>
+    <script src="widgets/ccSidebar.js"></script>
+    <script src="widgets/ccSpinner.js"></script>
+    <script src="widgets/ccWidgetClose.js"></script>
+    <script src="widgets/ccWidgetHeader.js"></script>
+    <script src="widgets/ccWidgetMinimize.js"></script>
+
+    <!-- dashboard -->
+    <script src="dashboard/dashboard.module.js"></script>
+    <script src="dashboard/config.route.js"></script>
+    <script src="dashboard/dashboard.js"></script>
+    
+    <!--avengers module-->
+    <script src="avengers/avengers.module.js"></script>
+    <script src="avengers/config.route.js"></script>
+    <script src="avengers/avengers.js"></script>
+    <!-- endinject -->
+    
+    <!--/////////////////////////-->
+  
+    <!--vault module-->
+    <script src="vault/vault.module.js"></script>
+    <script src="vault/config.route.js"></script>
+    <script src="vault/vault.js"></script>
+    
+    <!--version-->
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+    
 </body>
 </html>
