@@ -13,8 +13,8 @@
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="bower_components/toastr/toastr.css" rel="stylesheet" />
     
-    <link href="app/architecture/design/content/customtheme.css" rel="stylesheet">
-    <link href="app/architecture/design/content/styles.css" rel="stylesheet" />
+    <link href="architecture/design/content/customtheme.css" rel="stylesheet">
+    <link href="architecture/design/content/styles.css" rel="stylesheet" />
     <style>
         /* This helps the ng-show/ng-hide animations start at the right place. */
         /* Since Angular has this but needs to load, this gives us the class early. */
@@ -28,11 +28,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
     <div>
-        <div ng-include="'app/architecture/design/layout/shell.html'"></div>
+        <div ng-include="'architecture/design/layout/shell.html'"></div>
         <div id="splash-page" ng-show="false">
             <div class="page-splash">
                 <div class="page-splash-message">
-                    Angular Modular Demo
+                    Loading Angular
                 </div>
                 <div class="progress progress-striped active page-progress-bar">
                     <div class="bar"></div>
@@ -43,13 +43,11 @@
 
     <!-- inject-vendor:js -->
     <script>window.$ = window.jQuery = require('jquery')</script>
-    <script>window.toastr = require('toastr')</script>
-    <script>window.moment = require('moment')</script>
     
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <!--<script src="bower_components/angular-animate/angular-animate.js"></script>-->
-    <script src="../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -62,53 +60,49 @@
 
     <!-- inject:js -->
     <!-- Bootstrapping -->
-    <script src="app/app.js"></script>
+    <script src="app.js"></script>
 
     <!-- Reusable Blocks/Modules -->
-    <script src="app/architecture/blocks/exception/exception.module.js"></script>
-    <script src="app/architecture/blocks/exception/exception-handler.provider.js"></script>
-    <script src="app/architecture/blocks/exception/exception.js"></script>
-    <script src="app/architecture/blocks/logger/logger.module.js"></script>
-    <script src="app/architecture/blocks/logger/logger.js"></script>
-    <script src="app/architecture/blocks/router/router.module.js"></script>
-    <script src="app/architecture/blocks/router/routehelper.js"></script>
-    <script src="app/architecture/blocks/version/version.js"></script>
-    <script src="app/architecture/blocks/version/version-directive.js"></script>
-    <script src="app/architecture/blocks/version/interpolate-filter.js"></script>
+    <script src="architecture/blocks/exception/exception.module.js"></script>
+    <script src="architecture/blocks/exception/exception-handler.provider.js"></script>
+    <script src="architecture/blocks/exception/exception.js"></script>
+    <script src="architecture/blocks/logger/logger.module.js"></script>
+    <script src="architecture/blocks/logger/logger.js"></script>
+    <script src="architecture/blocks/router/router.module.js"></script>
+    <script src="architecture/blocks/router/routehelper.js"></script>
+    <script src="architecture/blocks/version/version.js"></script>
+    <script src="architecture/blocks/version/version-directive.js"></script>
+    <script src="architecture/blocks/version/interpolate-filter.js"></script>
 
     <!-- core module -->
-    <script src="app/architecture/core/core.module.js"></script>
-    <script src="app/architecture/core/constants.js"></script>
-    <script src="app/architecture/core/config.js"></script>
-    <script src="app/architecture/core/dataservice.js"></script>
+    <script src="architecture/core/core.module.js"></script>
+    <script src="architecture/core/constants.js"></script>
+    <script src="architecture/core/config.js"></script>
 
     <!-- layout -->
-    <script src="app/architecture/design/layout/layout.module.js"></script>
-    <script src="app/architecture/design/layout/shell.js"></script>
-    <script src="app/architecture/design/layout/sidebar.js"></script>
+    <script src="architecture/design/layout/layout.module.js"></script>
+    <script src="architecture/design/layout/shell.js"></script>
+    <script src="architecture/design/layout/sidebar.js"></script>
 
     <!--widgets-->
-    <script src="app/architecture/widgets/widgets.module.js"></script>
-    <script src="app/architecture/widgets/ccSidebar.js"></script>
-    <script src="app/architecture/widgets/ccSpinner.js"></script>
-    <script src="app/architecture/widgets/ccWidgetClose.js"></script>
-    <script src="app/architecture/widgets/ccWidgetHeader.js"></script>
-    <script src="app/architecture/widgets/ccWidgetMinimize.js"></script>
-
-    <!-- dashboard -->
-    <script src="app/dashboard/dashboard.module.js"></script>
-    <script src="app/dashboard/config.route.js"></script>
-    <script src="app/dashboard/dashboard.js"></script>
-    
-    <!--avengers module-->
-    <script src="app/avengers/avengers.module.js"></script>
-    <script src="app/avengers/config.route.js"></script>
-    <script src="app/avengers/avengers.js"></script>
+    <script src="architecture/widgets/widgets.module.js"></script>
+    <script src="architecture/widgets/ccSidebar.js"></script>
+    <script src="architecture/widgets/ccSpinner.js"></script>
+    <script src="architecture/widgets/ccWidgetClose.js"></script>
+    <script src="architecture/widgets/ccWidgetHeader.js"></script>
+    <script src="architecture/widgets/ccWidgetMinimize.js"></script>
     
     <!--vault module-->
-    <script src="app/vault/vault.module.js"></script>
-    <script src="app/vault/config.route.js"></script>
-    <script src="app/vault/vault.js"></script>
+    <script src="vault/vault.module.js"></script>
+    <script src="vault/config.route.js"></script>
+    <script src="vault/vault.js"></script>
+    <script src="vault/vault.service.js"></script>
+    
+    <!--account module-->
+    <script src="account/account.service.js"></script>
+    <script src="account/account.module.js"></script>
+    <script src="account/config.route.js"></script>
+    <script src="account/account.js"></script>
     <!-- endinject -->
     
 </body>

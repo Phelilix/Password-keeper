@@ -5,7 +5,8 @@ angular.module('app', [
     'app.core',
     'app.layout',
     'app.vault',
-    'app.avengers',
-    'app.dashboard',
-    'app.widgets'
+    'app.account',
+    'app.accountService',
+    'app.widgets',
+    "app.vaultService"
 ]);

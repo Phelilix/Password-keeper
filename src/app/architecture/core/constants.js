@@ -4,7 +4,8 @@
 
     angular
         .module('app.core')
-        .constant('toastr', toastr)
-        .constant('moment', moment)
+        .constant('toastr', require('toastr'))
+        .constant('moment', require('moment'))
+//        .constant('readline', require('readline'))
 ;
 })();

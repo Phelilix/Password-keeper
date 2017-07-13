@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.avengers')
+        .module('app.account')
         .run(appRun);
 
     // appRun.$inject = ['routehelper']
@@ -15,15 +15,15 @@
     function getRoutes() {
         return [
             {
-                url: '/avengers',
+                url: '/',
                 config: {
-                    templateUrl: 'app/avengers/avengers.html',
-                    controller: 'Avengers',
+                    templateUrl: 'account/account.html',
+                    controller: 'Account',
                     controllerAs: 'vm',
-                    title: 'avengers',
+                    title: 'account settings',
                     settings: {
-                        nav: 2,
-                        content: '<i class="fa fa-lock"></i> Avengers'
+                        nav: 1,
+                        content: '<i class="fa fa-lock"></i> Account'
                     }
                 }
             }

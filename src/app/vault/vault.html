@@ -1,21 +1,30 @@
-﻿<section class="mainbar">
+﻿<style>
+    .hideWhenHover:hover {
+        color: inherit;
+    }
+    .hideWhenHover {
+        color: transparent;
+    }
+</style>
+<section class="mainbar">
     <section class="matter">
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div class="widget-content user">
-                        
-                        <table class="table table-condensed table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Character</th>
+                    <div class="widget-content user" ng-controller='Vault'>
+                        <div data-cc-widget-header title="{{vm.title}}"></div>
+                        <input type="button" value="save" name="savePockets" ng-click="vm.saveData();"/>
+                        <table>
+                            <tbody ng-model='vm.data' ng-repeat="item in vm.data track by $index">
+                                <tr><th class='text-center' colspan="2" >{{item.data.subject}}</th><td><input type="image" src="architecture/design/content/images/remove.png" value="remove" name="removePocket" ng-click="vm.removePocket($index, newItem, newValue);"/></td></tr>
+                                <tr ng-repeat='(key, value) in item.data track by $index'>
+                                    <td>{{key}}</td>
+                                    <td class='hideWhenHover'><input ng-model="item.data[key]"/></td>
+                                    <td><input type="image" src="architecture/design/content/images/remove.png" value="remove" name="removeItem" ng-click="vm.removeItem($parent.$index, key);"/></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td> ...</td>
-                                </tr>
+                                <tr><td><input ng-model="newItem"/></td><td><input ng-model="newValue"/></td><td><input type="image" src="architecture/design/content/images/add.png" value="add" name="addItem" ng-click="vm.addItem($index, newItem, newValue); newValue = ''; newItem = '';"/></td></tr>
                             </tbody>
+                            <tbody><tr><td>subject</td><td><input ng-model="subject"/></td><td><input type="image" src="architecture/design/content/images/add.png" value="add" name="addPocket" ng-click="vm.addPocket(subject); subject = '';"/></td></tr></tbody>
                         </table>
                     </div>
                     <div class="widget-foot">

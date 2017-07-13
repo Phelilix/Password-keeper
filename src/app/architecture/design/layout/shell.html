@@ -7,11 +7,11 @@
         </div>
     </div>
 
-    <header class="clearfix">
-        <div data-ng-include="'app/architecture/design/layout/topnav.html'"></div>
+    <header class=""> <!-- clearfix -->
+        <div data-ng-include="'architecture/design/layout/topnav.html'"></div>
     </header>
     <section id="content" class="content">
-        <div data-ng-include="'app/architecture/design/layout/sidebar.html'"></div>
+        <div data-ng-include="'architecture/design/layout/sidebar.html'"></div>
 
         <div data-ng-view class="shuffle-animation"></div>
 
@@ -19,7 +19,7 @@
              ngplus-overlay-delay-in="50"
              ngplus-overlay-delay-out="700"
              ngplus-overlay-animation="dissolve-animation">
-            <img src="app/architecture/design/content/images/busy.gif"/>
+            <img src="architecture/design/content/images/busy.gif"/>
 
             <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
         </div>

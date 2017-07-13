@@ -1,28 +1,23 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "password-keeper",
+  "description": "An Electron project to manage passwords, made with Angular",
   "version": "0.0.0",
   "homepage": "https://github.com/angular/angular-seed",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-loader": "~1.5.0",
-    "angular-mocks": "~1.5.0",
+    "angular": "1.6.4",
+    "angular-route": "1.6.4",
+    "angular-loader": "1.6.4",
+    "angular-mocks": "1.6.4",
     "html5-boilerplate": "^5.3.0",
-    "toastr": "~2.0.1",
+    "toastr": "^2.1.3",
     "bootstrap": "~3.1.1",
     "moment": "~2.6.0",
     "jquery": "~2.1.0",
-    "angular-animate": "^1.6.4",
-    "angular-sanitize": "~1.2.24",
+    "angular-animate": "1.6.4",
+    "angular-sanitize": "1.6.4",
     "font-awesome": "~4.0.3",
     "extras.angular.plus": "~0.9.0"
-  },
-  "resolutions": {
-    "angular": "1.5.11",
-    "jquery": "^3.2.1",
-    "angular-animate": "~1.2.24"
   }
 }

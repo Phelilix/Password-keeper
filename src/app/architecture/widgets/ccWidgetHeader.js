@@ -21,7 +21,7 @@
                 'rightText': '@',
                 'allowCollapse': '@'
             },
-            templateUrl: 'app/architecture/widgets/widgetheader.html',
+            templateUrl: 'architecture/widgets/widgetheader.html',
             restrict: 'A'
         };
         return directive;

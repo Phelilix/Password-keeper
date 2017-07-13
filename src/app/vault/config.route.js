@@ -17,12 +17,12 @@
             {
                 url: '/vault',
                 config: {
-                    templateUrl: 'app/vault/vault.html',
+                    templateUrl: 'vault/vault.html',
                     controller: 'Vault',
                     controllerAs: 'vm',
                     title: 'the vault',
                     settings: {
-                        nav: 3,
+                        nav: 2,
                         content: '<i class="fa fa-lock"></i> Vault'
                     }
                 }
