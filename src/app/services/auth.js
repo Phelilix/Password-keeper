@@ -5,12 +5,14 @@
 
     AuthService.$inject = ['Session', 'AuthEventBroadcastService', '$q', 'logger', 'USER_ROLES'];
     function AuthService(Session, AuthEventBroadcastService, $q, logger, USER_ROLES) {
-        var crypto = require('crypto');
-        var fs = require('fs');
+        const crypto = require('crypto');
+        const fs = require('fs');
+        
+        const app = requireApp();
 
         const algorithm = 'aes-256-ctr';
-        const vaultLocation = 'src/app/vault/vault.json';
-        const location = 'src/app/account/passDigest.json';
+        const vaultLocation = app.getPath('userData').concat('\\vault.json');
+        const location = app.getPath('userData').concat('\\password.json');
         const digest = 'sha512';
         const textFormat = 'utf8';
         const cryptedFormat = 'hex';
@@ -29,6 +31,11 @@
             savePockets: savePockets
 //            generateSalt: randomHexString
         };
+        
+        function requireApp(){
+            var electron = require('electron');
+            return electron.remote.app;
+        }
 
         function randomHexString(size) {
             return randomHexString(size);
