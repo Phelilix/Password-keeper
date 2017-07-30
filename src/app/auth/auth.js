@@ -6,7 +6,6 @@
             .controller('LoginController', LoginController);
 
     LoginController.$inject = ['AuthService', 'logger', '$location', '$scope'];
-
     function LoginController(AuthService, logger, $location, $scope) {
         var vm = this;
         vm.login = login;

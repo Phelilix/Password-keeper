@@ -6,7 +6,6 @@
             .controller('Vault', Vault);
 
     Vault.$inject = ['AuthService', 'logger', '$scope', '$route', '$location', 'Session'];
-
     function Vault(AuthService, logger, $scope, $route, $location, Session) {
         /*jshint validthis: true */
 

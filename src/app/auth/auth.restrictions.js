@@ -6,7 +6,6 @@
             .run(AuthRestrictions);
     
     AuthRestrictions.$inject = ['$rootScope', 'AuthEventBroadcastService', 'AuthService', 'Session', '$location'];
-    
     function AuthRestrictions($rootScope, AuthEventBroadcastService, AuthService, Session, $location) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
             var authorizedRoles = next.settings.authorizedRoles;

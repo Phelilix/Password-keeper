@@ -5,7 +5,6 @@
             .module('app.widgets')
             .directive('ccWidgetClose', ccWidgetClose);
 
-    /* @ngInject */
     function ccWidgetClose() {
         /* Usage: */
         /* <a data-cc-widget-close></a> */
