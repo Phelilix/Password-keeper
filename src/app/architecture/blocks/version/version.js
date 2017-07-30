@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('blocks.version', [
-  'blocks.version.interpolate-filter',
-  'blocks.version.version-directive'
+    'blocks.version.interpolate-filter',
+    'blocks.version.version-directive'
 ])
 
-.value('version', '0.1');
+        .value('version', '0.1');

@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.widgets')
-        .directive('ccWidgetHeader', ccWidgetHeader);
+            .module('app.widgets')
+            .directive('ccWidgetHeader', ccWidgetHeader);
 
     /* @ngInject */
-    function ccWidgetHeader () {
+    function ccWidgetHeader() {
         //Usage:
         //<div data-cc-widget-header title="vm.map.title"></div>
         // Creates:

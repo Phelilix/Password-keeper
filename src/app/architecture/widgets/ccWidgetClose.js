@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.widgets')
-        .directive('ccWidgetClose', ccWidgetClose);
+            .module('app.widgets')
+            .directive('ccWidgetClose', ccWidgetClose);
 
     /* @ngInject */
-    function ccWidgetClose () {
+    function ccWidgetClose() {
         // Usage:
         // <a data-cc-widget-close></a>
         // Creates:

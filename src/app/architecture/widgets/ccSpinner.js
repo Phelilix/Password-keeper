@@ -1,14 +1,14 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.widgets')
-        .directive('ccSpinner', ccSpinner);
+            .module('app.widgets')
+            .directive('ccSpinner', ccSpinner);
 
     // ccSpinner.$inject = ['$window'];
 
     /* @ngInject */
-    function ccSpinner ($window) {
+    function ccSpinner($window) {
         // Description:
         //  Creates a new Spinner and sets its options
         // Usage:
@@ -21,7 +21,7 @@
 
         function link(scope, element, attrs) {
             scope.spinner = null;
-            scope.$watch(attrs.ccSpinner, function(options) {
+            scope.$watch(attrs.ccSpinner, function (options) {
                 if (scope.spinner) {
                     scope.spinner.stop();
                 }

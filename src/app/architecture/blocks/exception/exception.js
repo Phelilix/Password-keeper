@@ -1,9 +1,9 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('blocks.exception')
-        .factory('exception', exception);
+            .module('blocks.exception')
+            .factory('exception', exception);
 
     /* @ngInject */
     function exception(logger) {
@@ -13,7 +13,7 @@
         return service;
 
         function catcher(message) {
-            return function(reason) {
+            return function (reason) {
                 logger.error(message, reason);
             };
         }

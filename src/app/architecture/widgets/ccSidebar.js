@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.widgets')
-        .directive('ccSidebar', ccSidebar);
+            .module('app.widgets')
+            .directive('ccSidebar', ccSidebar);
 
     /* @ngInject */
-    function ccSidebar () {
+    function ccSidebar() {
         // Opens and closes the sidebar menu.
         // Usage:
         //  <div data-cc-sidebar">

@@ -1,12 +1,12 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.widgets')
-        .directive('ccWidgetMinimize', ccWidgetMinimize);
+            .module('app.widgets')
+            .directive('ccWidgetMinimize', ccWidgetMinimize);
 
     /* @ngInject */
-    function ccWidgetMinimize () {
+    function ccWidgetMinimize() {
         // Usage:
         // <a data-cc-widget-minimize></a>
         // Creates:

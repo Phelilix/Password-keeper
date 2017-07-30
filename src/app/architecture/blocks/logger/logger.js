@@ -1,9 +1,9 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('blocks.logger')
-        .factory('logger', logger);
+            .module('blocks.logger')
+            .factory('logger', logger);
 
     logger.$inject = ['$log', 'toastr'];
 
@@ -11,13 +11,13 @@
         var service = {
             showToasts: true,
 
-            error   : error,
-            info    : info,
-            success : success,
-            warning : warning,
+            error: error,
+            info: info,
+            success: success,
+            warning: warning,
 
             // straight to console; bypass toastr
-            log     : $log.log
+            log: $log.log
         };
 
         return service;

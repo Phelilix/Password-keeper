@@ -1,10 +1,10 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('blocks.router')
-        .provider('routehelperConfig', routehelperConfig)
-        .factory('routehelper', routehelper);
+            .module('blocks.router')
+            .provider('routehelperConfig', routehelperConfig)
+            .factory('routehelper', routehelper);
 
     routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig'];
 
@@ -18,7 +18,7 @@
             // resolveAlways: {ready: function(){ } }
         };
 
-        this.$get = function() {
+        this.$get = function () {
             return {
                 config: this.config
             };
@@ -46,9 +46,9 @@
         ///////////////
 
         function configureRoutes(routes) {
-            routes.forEach(function(route) {
+            routes.forEach(function (route) {
                 route.config.resolve =
-                    angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
+                        angular.extend(route.config.resolve || {}, routehelperConfig.config.resolveAlways);
                 $routeProvider.when(route.url, route.config);
             });
             $routeProvider.otherwise({redirectTo: '/'});
@@ -59,18 +59,18 @@
             // On routing error, go to the dashboard.
             // Provide an exit clause if it tries to do it twice.
             $rootScope.$on('$routeChangeError',
-                function(event, current, previous, rejection) {
-                    if (handlingRouteChangeError) {
-                        return;
+                    function (event, current, previous, rejection) {
+                        if (handlingRouteChangeError) {
+                            return;
+                        }
+                        routeCounts.errors++;
+                        handlingRouteChangeError = true;
+                        var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
+                                'unknown target';
+                        var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
+                        logger.warning(msg, [current]);
+                        $location.path('/');
                     }
-                    routeCounts.errors++;
-                    handlingRouteChangeError = true;
-                    var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
-                        'unknown target';
-                    var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
-                    logger.warning(msg, [current]);
-                    $location.path('/');
-                }
             );
         }
 
@@ -94,12 +94,12 @@
 
         function updateDocTitle() {
             $rootScope.$on('$routeChangeSuccess',
-                function(event, current, previous) {
-                    routeCounts.changes++;
-                    handlingRouteChangeError = false;
-                    var title = routehelperConfig.config.docTitle + ' ' + (current.title || '');
-                    $rootScope.title = title; // data bind to <title>
-                }
+                    function (event, current, previous) {
+                        routeCounts.changes++;
+                        handlingRouteChangeError = false;
+                        var title = routehelperConfig.config.docTitle + ' ' + (current.title || '');
+                        $rootScope.title = title; // data bind to <title>
+                    }
             );
         }
     }

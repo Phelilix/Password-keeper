@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('app.core', [
@@ -9,7 +9,7 @@
         /*
          * Our reusable cross app code modules
          */
-        'blocks.exception', 'blocks.logger', 'blocks.router', 'blocks.version',
+        'blocks.exception', 'blocks.logger', 'blocks.router', 'blocks.version', 
         /*
          * 3rd Party modules
          */
