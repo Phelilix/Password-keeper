@@ -1,0 +1,19 @@
+<section id="account-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="loginForm"
+                          ng-submit="vm.login(vm.credentials)" novalidate>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password"
+                               ng-model="vm.credentials.password">
+
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

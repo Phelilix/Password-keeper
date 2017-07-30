@@ -1,81 +1,72 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.vault')
-        .controller('Vault', Vault);
+            .module('app.vault')
+            .controller('Vault', Vault);
 
-        Vault.$inject = ['vaultService', 'logger', '$scope', '$route', '$location'];
-        
+    Vault.$inject = ['AuthService', 'logger', '$scope', '$route', '$location', 'Session'];
+
     /* @ngInject */
-    function Vault(vaultService, logger, $scope, $route, $location) {
+    function Vault(AuthService, logger, $scope, $route, $location, Session) {
         /*jshint validthis: true */
-//        var pockets = vaultService.fetchPockets('src/app/vault/data.json');
-//        var fetchPocketsVar = vaultService.fetchPockets('src/app/vault/data.json');
-//        var getInformatiVar = vaultService.getInformation();
-//        var promiseInforVar = vaultService.promiseInformation(location, pockets, pass);
-        
+//        var pockets = AuthService.fetchPockets('src/app/vault/data.json');
+//        var fetchPocketsVar = AuthService.fetchPockets('src/app/vault/data.json');
+//        var getInformatiVar = AuthService.getInformation();
+//        var promiseInforVar = AuthService.promiseInformation(location, pockets, pass);
+
         var vm = this;
         vm.title = 'Vault';
         vm.loggedIn = false;
-        vm.pass = '20060003238870DaeNhem10';
         vm.addPocket = addPocket;
         vm.addItem = addItem;
         vm.removePocket = removePocket;
         vm.removeItem = removeItem;
         vm.saveData = saveData;
-        
+        vm.data = [];
+
         activate();
-        
-        function loadData(){
-            logger.info('loading...')
-            vaultService.fetchPockets().then(function(pockets){
-                $scope.$apply(function(){
-                    vm.data = vaultService.decryptPockets(pockets,vm.pass);
+
+        function loadData() {
+            logger.info('loading...');
+            AuthService.loadPockets(Session.getPassword()).then(pockets => {
+                $scope.$apply(function () {
+                    vm.data = pockets;
                 });
                 logger.success('loading complete.')
             });
         }
-        
-        function saveData(){
-            logger.info('saving...')
-            vaultService.encryptPockets(vm.data, vm.pass).then((pockets) => {
-                vaultService.savePockets(pockets);
-                logger.success('Save complete.');
+
+        function saveData() {
+            logger.info('saving...');
+            AuthService.savePockets(vm.data, Session.getPassword()).then(() => {
+                logger.success('Saving complete.');
                 loadData();
             });
         }
-        
-        function addPocket(subject){
+
+        function addPocket(subject) {
             var data = {subject: subject};
             vm.data.push({data: data});
         }
-        
-        function removePocket(index){
+
+        function removePocket(index) {
             vm.data.splice(index, 1);
         }
-        
-        function addItem(index, item, value){
+
+        function addItem(index, item, value) {
             vm.data[index].data[item] = value;
         }
-        
-        function removeItem(pocketIndex, itemKey){
+
+        function removeItem(pocketIndex, itemKey) {
             delete vm.data[pocketIndex].data[itemKey];
         }
-        
-//        function changePassword(){
-//            vaultService.readFile('account/passDigest')
-//        }
 
         function activate() {
-            console.log(window.location);
-            console.log($location.url());
-            console.log($location.path());
-            console.log($route.current);
 //            Using a resolver on all routes or dataservice.ready in every controller
 //            return dataservice.ready(promises).then(function(){
+            loadData();
             logger.info('Activated Vault View');
-//            vaultService.fetch();
         }
     }
 })();

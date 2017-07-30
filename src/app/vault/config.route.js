@@ -1,29 +1,30 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.vault')
-        .run(appRun);
+            .module('app.vault')
+            .run(appRun);
 
     // appRun.$inject = ['routehelper']
 
     /* @ngInject */
-    function appRun(routehelper) {
-        routehelper.configureRoutes(getRoutes());
+    function appRun(routehelper, USER_ROLES) {
+        routehelper.configureRoutes(getRoutes(USER_ROLES));
     }
 
-    function getRoutes() {
+    function getRoutes(USER_ROLES) {
         return [
             {
-                url: '/vault',
+                url: '/',
                 config: {
                     templateUrl: 'vault/vault.html',
                     controller: 'Vault',
                     controllerAs: 'vm',
                     title: 'the vault',
                     settings: {
-                        nav: 2,
-                        content: '<i class="fa fa-lock"></i> Vault'
+                        nav: 1,
+                        content: '<i class="fa fa-lock"></i> Vault',
+                        authorizedRoles: [USER_ROLES.accountHolder]
                     }
                 }
             }

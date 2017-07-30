@@ -1,59 +1,46 @@
-(function() {
+(function () {
     'use strict';
 
     angular
-        .module('app.account')
-        .controller('Account', Account);
+            .module('app.account')
+            .controller('Account', Account);
 
-    Account.$inject = ['$q', 'accountService', 'logger', '$scope', '$location'];
+    Account.$inject = ['$q', 'AuthService', 'logger', '$scope', '$location'];
 
-    function Account($q, accountService, logger, $scope, $location) {
+    function Account($q, AuthService, logger, $scope, $location) {
 
         /*jshint validthis: true */
         var vm = this;
         vm.title = 'Account';
-        vm.isPassIdentical = true;
-        vm.checkPassword = checkPassword;
+        vm.isPassEqual = true;
+        vm.isEqual = isPasswordEqualToConfirmation;
+        vm.changePass = changePassword;
+        vm.password = {password: '', confirmation: ''};
+        vm.oldPassword = '';
 
         activate();
 
         function activate() {
-            console.log(window.location);
-            console.log($location.url());
-            console.log($location.path());
             var promises = [Promise.resolve(true)];
 //            Using a resolver on all routes or dataservice.ready in every controller
 //            return dataservice.ready(promises).then(function(){
-            return $q.all(promises).then(function() {
+            return $q.all(promises).then(function () {
                 logger.info('Activated Account View');
             });
         }
-        
-        function changePassword(){
-            accountService.changePassword()
-        }
-        
-        function checkPassword(){
-            if(vm.password != vm.passwordDoubleCheck){
-                vm.isPassIdentical = false;
-            }else{
-                vm.isPassIdentical = true;
-            }
-        }
-        
-        function verifyPass(){
-            logger.info('logging in...');
-            accountService.verifyPass(vm.pass).then(isLoggedIn => {
-                $scope.$apply(function(){
-                    vm.loggedIn = isLoggedIn;
+
+        function changePassword() {
+            
+                AuthService.changePassword(vm.oldPassword, vm.password.password).then(function(){
+                    logger.success('changed password');
+                    $location.path('/login');
+                }, function(){
+                    logger.info('could not change password.');
                 });
-                if(isLoggedIn){
-                    logger.success('logged in');
-                    loadData();
-                }else{
-                    logger.warning('failed to log in');
-                }
-            });
+        }
+
+        function isPasswordEqualToConfirmation() {
+                vm.isPassEqual = vm.password.password === vm.password.confirmation;
         }
     }
 })();

@@ -3,13 +3,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    dddddddd
-<!--                    <input type="password" ng-model="vm.password" ng-change="vm.checkPassword()"/>
-                    <input type="password" ng-model="vm.passwordDoubleCheck"/>
-                    <input type="button" value="confirm" ng-click="vm.changePassword()"/>
-                </div>
-                <div ng-show="vm.isPassIdentical">
-                    <p>The passwords do not match</p>-->
+                    <form name="loginForm"
+                          ng-submit="vm.changePass(vm.oldPassword, vm.password.password)" novalidate>
+                        <label for="oldPassword">Current password:</label>
+                        <input type="password" id ="oldPassword" ng-model="vm.oldPassword"/>
+                        
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" ng-change="vm.isEqual()"
+                               ng-model="vm.password.password">
+
+                        <label for="confirmation">Confirmation:</label>
+                        <input type="password" id="confirmation" ng-change="vm.isEqual()"
+                               ng-model="vm.password.confirmation">
+
+                        <button ng-disabled="!vm.isPassEqual" type="submit">Submit</button>
+                        <p ng-show="!vm.isPassEqual">The password and confirmation do not match.</p>
+
+                    </form>
                 </div>
             </div>
         </div>

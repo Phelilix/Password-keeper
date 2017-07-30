@@ -4,9 +4,9 @@
 angular.module('app', [
     'app.core',
     'app.layout',
+    'app.widgets',
     'app.vault',
     'app.account',
-    'app.accountService',
-    'app.widgets',
-    "app.vaultService"
+    'app.auth',
+    'app.services'
 ]);

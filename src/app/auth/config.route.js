@@ -2,10 +2,10 @@
     'use strict';
 
     angular
-            .module('app.account')
+            .module('app.auth')
             .run(appRun);
 
-    // appRun.$inject = ['routehelper']
+     appRun.$inject = ['routehelper', 'USER_ROLES'];
 
     /* @ngInject */
     function appRun(routehelper, USER_ROLES) {
@@ -15,14 +15,16 @@
     function getRoutes(USER_ROLES) {
         return [
             {
-                url: '/account',
+                url: '/login',
                 config: {
-                    templateUrl: 'account/account.html',
-                    controller: 'Account',
+                    templateUrl: 'auth/auth.html',
+                    controller: 'LoginController',
                     controllerAs: 'vm',
-                    title: 'account settings',
+                    title: 'Signing in',
                     settings: {
-                        authorizedRoles: [USER_ROLES.accountHolder]
+                        nav: 2,
+                        content: '<i class="fa fa-lock"></i> Log in',
+                        authorizedRoles: [USER_ROLES.public]
                     }
                 }
             }

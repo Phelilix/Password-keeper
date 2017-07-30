@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var core = angular.module('app.core');
@@ -12,8 +12,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[NG-Modular Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Angular Modular Demo',
+        appErrorPrefix: '[Error] ', //Configure the exceptionHandler decorator
+        appTitle: 'Password keeper',
         version: '1.0.0'
     };
 
@@ -22,7 +22,7 @@
     core.config(configure);
 
     /* @ngInject */
-    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
+    function configure($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
@@ -30,7 +30,7 @@
 
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
-        routehelperConfigProvider.config.docTitle = 'NG-Modular: ';
+        routehelperConfigProvider.config.docTitle = 'Password Keeper: ';
 //        var resolveAlways = { /* @ngInject */
 //            ready: function(dataservice) {
 //                return dataservice.ready();
