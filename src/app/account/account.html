@@ -16,7 +16,7 @@
                         <input type="password" id="confirmation" ng-change="vm.isEqual()"
                                ng-model="vm.password.confirmation">
 
-                        <button ng-disabled="!vm.isPassEqual" type="submit">Submit</button>
+                        <input ng-disabled="!vm.isPassEqual" type="submit" value="Submit">
                         <p ng-show="!vm.isPassEqual">The password and confirmation do not match.</p>
 
                     </form>

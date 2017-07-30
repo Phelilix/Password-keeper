@@ -23,13 +23,11 @@
 
         return {
             verifyPass: verifyPass,
-//            pbkdf2Hex: pbkdf2Hex,
             changePassword: changePassword,
             isAuthorized: isAuthorized,
             login: login,
             loadPockets: getPockets,
             savePockets: savePockets
-//            generateSalt: randomHexString
         };
         
         function requireApp(){

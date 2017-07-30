@@ -6,16 +6,15 @@
             .provider('routehelperConfig', routehelperConfig)
             .factory('routehelper', routehelper);
 
-    routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig'];
 
-    // Must configure via the routehelperConfigProvider
+    /* Must configure via the routehelperConfigProvider */
     function routehelperConfig() {
         /* jshint validthis:true */
         this.config = {
-            // These are the properties we need to set
-            // $routeProvider: undefined
-            // docTitle: ''
-            // resolveAlways: {ready: function(){ } }
+             /* These are the properties we need to set */
+             /* $routeProvider: undefined */
+             /* docTitle: '' */
+             /* resolveAlways: {ready: function(){ } } */
         };
 
         this.$get = function () {
@@ -24,7 +23,8 @@
             };
         };
     }
-
+    
+    routehelper.$inject = ['$location', '$rootScope', '$route', 'logger', 'routehelperConfig'];
     function routehelper($location, $rootScope, $route, logger, routehelperConfig) {
         var handlingRouteChangeError = false;
         var routeCounts = {
@@ -43,7 +43,7 @@
         init();
 
         return service;
-        ///////////////
+        /*///////////////*/
 
         function configureRoutes(routes) {
             routes.forEach(function (route) {
@@ -55,9 +55,9 @@
         }
 
         function handleRoutingErrors() {
-            // Route cancellation:
-            // On routing error, go to the dashboard.
-            // Provide an exit clause if it tries to do it twice.
+            /* Route cancellation: */
+            /* On routing error, go to the dashboard. */
+            /* Provide an exit clause if it tries to do it twice. */
             $rootScope.$on('$routeChangeError',
                     function (event, current, previous, rejection) {
                         if (handlingRouteChangeError) {
@@ -98,7 +98,7 @@
                         routeCounts.changes++;
                         handlingRouteChangeError = false;
                         var title = routehelperConfig.config.docTitle + ' ' + (current.title || '');
-                        $rootScope.title = title; // data bind to <title>
+                        $rootScope.title = title; /* data bind to <title> */
                     }
             );
         }

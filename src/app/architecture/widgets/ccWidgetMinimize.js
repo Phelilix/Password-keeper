@@ -7,10 +7,10 @@
 
     /* @ngInject */
     function ccWidgetMinimize() {
-        // Usage:
-        // <a data-cc-widget-minimize></a>
-        // Creates:
-        // <a data-cc-widget-minimize="" href="#"><i class="fa fa-chevron-up"></i></a>
+        /* Usage: */
+        /* <a data-cc-widget-minimize></a> */
+        /* Creates: */
+        /* <a data-cc-widget-minimize="" href="#"><i class="fa fa-chevron-up"></i></a> */
         var directive = {
             link: link,
             template: '<i class="fa fa-chevron-up"></i>',
@@ -19,7 +19,7 @@
         return directive;
 
         function link(scope, element, attrs) {
-            //$('body').on('click', '.widget .wminimize', minimize);
+            /* $('body').on('click', '.widget .wminimize', minimize); */
             attrs.$set('href', '#');
             attrs.$set('wminimize');
             element.click(minimize);

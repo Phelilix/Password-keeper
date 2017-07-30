@@ -14,10 +14,10 @@
             if (!AuthService.isAuthorized(authorizedRoles)) {
                 event.preventDefault();
                 if (Session.isAuthenticated()) {
-                    // user is not allowed
+                    /* user is not allowed */
                     AuthEventBroadcastService.notAuthorized();
                 } else {
-                    // user is not logged in
+                    /* user is not logged in */
                     AuthEventBroadcastService.notAuthenticated();
                 }
                 $location.path('/login');

@@ -16,12 +16,12 @@
             success: success,
             warning: warning,
 
-            // straight to console; bypass toastr
+            /* straight to console; bypass toastr */
             log: $log.log
         };
 
         return service;
-        /////////////////////
+        /*/////////////////////*/
 
         function error(message, data, title) {
             toastr.error(message, title);

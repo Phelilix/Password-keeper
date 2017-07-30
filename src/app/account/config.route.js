@@ -5,9 +5,8 @@
             .module('app.account')
             .run(appRun);
 
-    // appRun.$inject = ['routehelper']
+     appRun.$inject = ['routehelper', 'USER_ROLES'];
 
-    /* @ngInject */
     function appRun(routehelper, USER_ROLES) {
         routehelper.configureRoutes(getRoutes(USER_ROLES));
     }

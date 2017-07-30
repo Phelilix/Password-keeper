@@ -13,7 +13,7 @@
         var routes = routehelper.getRoutes();
         var refinedRoutes = null;
         vm.isCurrent = isCurrent;
-        //vm.sidebarReady = function(){console.log('done animating menu')}; // example
+        /* vm.sidebarReady = function(){console.log('done animating menu')}; // example */
 
         activate();
 

@@ -12,7 +12,7 @@
     }
 
     var config = {
-        appErrorPrefix: '[Error] ', //Configure the exceptionHandler decorator
+        appErrorPrefix: '[Error] ', /* Configure the exceptionHandler decorator */
         appTitle: 'Password keeper',
         version: '1.0.0'
     };
@@ -23,25 +23,25 @@
 
     /* @ngInject */
     function configure($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
-        // turn debugging off/on (no info or warn)
+        /* turn debugging off/on (no info or warn) */
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
 
-        // Configure the common route provider
+        /* Configure the common route provider */
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
         routehelperConfigProvider.config.docTitle = 'Password Keeper: ';
-//        var resolveAlways = { /* @ngInject */
-//            ready: function(dataservice) {
-//                return dataservice.ready();
-//            }
-//            // ready: ['dataservice', function (dataservice) {
-//            //    return dataservice.ready();
-//            // }]
-//        };
-//        routehelperConfigProvider.config.resolveAlways = resolveAlways;
+/*        var resolveAlways = { */
+/*            ready: function(dataservice) { */
+/*                return dataservice.ready(); */
+/*            } */
+/*            // ready: ['dataservice', function (dataservice) { */
+/*            //    return dataservice.ready(); */
+/*            // }] */
+/*        }; */
+/*        routehelperConfigProvider.config.resolveAlways = resolveAlways; */
 
-        // Configure the common exception handler
+        /* Configure the common exception handler */
         exceptionHandlerProvider.configure(config.appErrorPrefix);
     }
 })();

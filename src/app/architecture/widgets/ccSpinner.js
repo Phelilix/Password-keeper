@@ -7,12 +7,11 @@
 
     // ccSpinner.$inject = ['$window'];
 
-    /* @ngInject */
     function ccSpinner($window) {
-        // Description:
-        //  Creates a new Spinner and sets its options
-        // Usage:
-        //  <div data-cc-spinner="vm.spinnerOptions"></div>
+        /* Description: */
+        /*  Creates a new Spinner and sets its options */
+        /* Usage: */
+        /*  <div data-cc-spinner="vm.spinnerOptions"></div> */
         var directive = {
             link: link,
             restrict: 'A'

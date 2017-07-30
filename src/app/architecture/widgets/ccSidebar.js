@@ -7,12 +7,12 @@
 
     /* @ngInject */
     function ccSidebar() {
-        // Opens and closes the sidebar menu.
-        // Usage:
-        //  <div data-cc-sidebar">
-        //  <div data-cc-sidebar whenDoneAnimating="vm.sidebarReady()">
-        // Creates:
-        //  <div data-cc-sidebar class="sidebar">
+        /* Opens and closes the sidebar menu. */
+        /* Usage: */
+        /*  <div data-cc-sidebar"> */
+        /*  <div data-cc-sidebar whenDoneAnimating="vm.sidebarReady()"> */
+        /* Creates: */
+        /*  <div data-cc-sidebar class="sidebar"> */
         var directive = {
             link: link,
             restrict: 'A',

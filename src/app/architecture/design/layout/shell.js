@@ -21,16 +21,16 @@
 
         function activate() {
             logger.success(config.appTitle + ' loaded!', null);
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            dataservice.ready().then(function(){
-//                hideSplash();
-//            });
+/*            Using a resolver on all routes or dataservice.ready in every controller */
+/*            dataservice.ready().then(function(){ */
+/*                hideSplash(); */
+/*            }); */
             eventListeners();
             hideSplash();
         }
 
         function hideSplash() {
-            //Force a 1 second delay so we can see the splash.
+            /* Force a 1 second delay so we can see the splash. */
             $timeout(function () {
                 vm.showSplash = false;
             }, 1000);

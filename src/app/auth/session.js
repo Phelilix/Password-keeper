@@ -5,7 +5,7 @@
             .module('app.auth')
             .service('Session', Session);
     
-//    Session.$inject = [];
+/*    Session.$inject = []; */
     
     function Session() {
         this.user = null;

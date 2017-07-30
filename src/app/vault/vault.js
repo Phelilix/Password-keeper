@@ -7,13 +7,8 @@
 
     Vault.$inject = ['AuthService', 'logger', '$scope', '$route', '$location', 'Session'];
 
-    /* @ngInject */
     function Vault(AuthService, logger, $scope, $route, $location, Session) {
         /*jshint validthis: true */
-//        var pockets = AuthService.fetchPockets('src/app/vault/data.json');
-//        var fetchPocketsVar = AuthService.fetchPockets('src/app/vault/data.json');
-//        var getInformatiVar = AuthService.getInformation();
-//        var promiseInforVar = AuthService.promiseInformation(location, pockets, pass);
 
         var vm = this;
         vm.title = 'Vault';
@@ -63,8 +58,8 @@
         }
 
         function activate() {
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            return dataservice.ready(promises).then(function(){
+/*            Using a resolver on all routes or dataservice.ready in every controller */
+/*            return dataservice.ready(promises).then(function(){ */
             loadData();
             logger.info('Activated Vault View');
         }

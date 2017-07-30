@@ -7,12 +7,12 @@
 
     /* @ngInject */
     function ccWidgetClose() {
-        // Usage:
-        // <a data-cc-widget-close></a>
-        // Creates:
-        // <a data-cc-widget-close="" href="#" class="wclose">
-        //     <i class="fa fa-remove"></i>
-        // </a>
+        /* Usage: */
+        /* <a data-cc-widget-close></a> */
+        /* Creates: */
+        /* <a data-cc-widget-close="" href="#" class="wclose"> */
+        /*     <i class="fa fa-remove"></i> */
+        /* </a> */
         var directive = {
             link: link,
             template: '<i class="fa fa-remove"></i>',
