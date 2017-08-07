@@ -22,10 +22,11 @@
 
 
         return {
-            verifyPass: verifyPass,
             changePassword: changePassword,
             isAuthorized: isAuthorized,
             login: login,
+            passwordFileExists: passwordFileExists,
+            createNewUser: createNewUser,
             loadPockets: getPockets,
             savePockets: savePockets
         };
@@ -62,16 +63,53 @@
                         Session.create(getUserData(credentials));
                         AuthEventBroadcastService.loginSuccess();
                         return;
-                    }, () => {
+                    }, (err) => {
                         AuthEventBroadcastService.loginFailed();
-                        reject();
+                        throw err;
                     });
-            function getUserData(credentials) {
-                credentials.roles = [USER_ROLES.accountHolder];
-                return credentials;
-            }
             function verifyCred(credentials) {
                 return verifyPass(credentials.password);
+            }
+        }
+        
+        function getUserData(credentials) {
+            credentials.roles = [USER_ROLES.accountHolder];
+            return credentials;
+        }
+        
+        function passwordFileExists(){
+            return fileExists(location);
+            
+            function fileExists(location){
+                try{
+                    fs.accessSync(location);
+                    return true;
+                }catch(err){
+                    return false;
+                }
+            }
+        }
+        
+        function createNewUser(newPass){
+            newPass = newPass || "";
+            
+            return Promise.resolve([])
+                .then(all => randomHexString(saltSize).then(Array.prototype.concat.bind(all)))
+                .then(all => pbkdf2Hex(newPass, all[0], iterations, keylength, digest).then(Array.prototype.concat.bind(all)))
+            .then(all => {
+                destroyUser();
+                return saveJSON({digest: all[1], salt: all[0]});
+            });
+            
+            function destroyUser(){
+                return $q.all({
+                    pockets: savePockets([], ''),
+                    session: Session.destroy()
+                });
+            }
+            
+            function saveJSON(information) {
+                fs.writeFileSync(location, JSON.stringify(information));
             }
         }
 
@@ -103,9 +141,6 @@
                                 saveJSON({digest: components.digest, salt: parts.salt});
                                 Session.destroy();
                                 AuthEventBroadcastService.logOut();
-                                console.log('if you read this, it means that i have already passed on.');
-                            }, rejectReason => {
-                                console.log('if you read this, it means that i did not pass on?');
                             });
 
                 });
@@ -162,7 +197,7 @@
                         if (all[1] === all[0].digest) {
                             return;
                         } else {
-                            reject(pass);
+                            reject('wrong password');
                         }
                     });
         }
@@ -171,18 +206,18 @@
             return savePockets(pockets, pass);
 
             function savePockets(pockets, pass) {
-                var saltPromises = pockets.map(function (pocket) {
-                    return randomHexString(16);
-                });
-
-                return $q.all(saltPromises).then((salts) => {
-                    pockets.forEach(function (pocket, index, array) {
-                        pocket.salt = salts[index];
-                        pocket.data = encrypt(pass + pocket.salt, JSON.stringify(pocket.data));
+                return $q.all(pockets.map(pocket => {
+                    return randomHexString(16).then(newSalt => {
+                        return {
+                            salt: newSalt,
+                            data: encrypt(pass + newSalt, JSON.stringify(pocket.data))
+                        };
+                    }).then(pocket => {
+                        return JSON.stringify(pocket);
                     });
-                    return pockets || [/*{data: "", salt: ""}*/];
-                }).then(pockets => {
-                    return saveJSON(pockets)
+                })).then(pockets => {
+                    pockets = pockets || [];
+                    return save('['+pockets+']');
                 });
             }
 
@@ -192,9 +227,9 @@
                 crypted += cipher.final(cryptedFormat);
                 return crypted;
             }
-
-            function saveJSON(information) {
-                fs.writeFileSync(vaultLocation, JSON.stringify(information));
+            
+            function save(information){
+                fs.writeFileSync(vaultLocation, information);
             }
         }
 

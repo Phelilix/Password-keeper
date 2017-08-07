@@ -1,0 +1,36 @@
+<style>
+    label { 
+        width: 100px;
+    }
+</style>
+<section class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div class="widget-content user">
+                        <div data-cc-widget-header title="{{vm.title}}"></div>
+                        <form name="newuserform"
+                              ng-submit="vm.changePass(vm.password)" novalidate>
+
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" ng-change="vm.updateIsPassEqual()"
+                                   ng-model="vm.password"><br>
+
+                            <label for="confirmation">Confirmation:</label>
+                            <input type="password" id="confirmation" ng-change="vm.updateIsPassEqual()"
+                                   ng-model="vm.confirmation"><br>
+
+                            <input ng-show="vm.isPassEqual" ng-disabled="!vm.isPassEqual" type="submit" value="Submit"><br>
+                            <p ng-show="!vm.isPassEqual">The password and confirmation do not match.</p>
+
+                        </form>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

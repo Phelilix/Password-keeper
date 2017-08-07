@@ -5,9 +5,9 @@
             .module('app.account')
             .controller('Account', Account);
 
-    Account.$inject = ['$q', 'AuthService', 'logger', '$scope', '$location'];
+    Account.$inject = ['$q', 'AuthService', 'logger', '$scope', '$location', 'SpinnerService'];
 
-    function Account($q, AuthService, logger, $scope, $location) {
+    function Account($q, AuthService, logger, $scope, $location, SpinnerService) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -17,6 +17,7 @@
         vm.changePass = changePassword;
         vm.password = {password: '', confirmation: ''};
         vm.oldPassword = '';
+        vm.isBusy = false;
 
         activate();
 
@@ -30,13 +31,16 @@
         }
 
         function changePassword() {
-            
+            SpinnerService.showFor(
                 AuthService.changePassword(vm.oldPassword, vm.password.password).then(function(){
                     logger.success('changed password');
                     $location.path('/login');
                 }, function(){
                     logger.info('could not change password.');
-                });
+                }),
+                $scope,
+                vm
+            );
         }
 
         function isPasswordEqualToConfirmation() {

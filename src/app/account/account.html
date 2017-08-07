@@ -1,3 +1,8 @@
+<style>
+    label { 
+        width: 100px;
+    }
+</style>
 <section id="account-view" class="mainbar">
     <section class="matter">
         <div class="container">
@@ -6,18 +11,18 @@
                     <form name="loginForm"
                           ng-submit="vm.changePass(vm.oldPassword, vm.password.password)" novalidate>
                         <label for="oldPassword">Current password:</label>
-                        <input type="password" id ="oldPassword" ng-model="vm.oldPassword"/>
+                        <input ng-disabled="vm.isBusy" type="password" id ="oldPassword" ng-model="vm.oldPassword"/><br>
                         
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" ng-change="vm.isEqual()"
-                               ng-model="vm.password.password">
+                        <label for="password">New password:</label>
+                        <input ng-disabled="vm.isBusy" type="password" id="password" ng-change="vm.isEqual()"
+                               ng-model="vm.password.password"><br>
 
                         <label for="confirmation">Confirmation:</label>
-                        <input type="password" id="confirmation" ng-change="vm.isEqual()"
-                               ng-model="vm.password.confirmation">
+                        <input ng-disabled="vm.isBusy" type="password" id="confirmation" ng-change="vm.isEqual()"
+                               ng-model="vm.password.confirmation"><br>
 
-                        <input ng-disabled="!vm.isPassEqual" type="submit" value="Submit">
-                        <p ng-show="!vm.isPassEqual">The password and confirmation do not match.</p>
+                        <input ng-disabled="!vm.isPassEqual || vm.isBusy" type="submit" value="Submit"><br>
+                        <p ng-show="!vm.isPassEqual">The new password and confirmation do not match.</p>
 
                     </form>
                 </div>

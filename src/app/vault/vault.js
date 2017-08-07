@@ -27,7 +27,7 @@
                 $scope.$apply(function () {
                     vm.data = pockets;
                 });
-                logger.success('loading complete.')
+                logger.success('loading complete.');
             });
         }
 
@@ -41,7 +41,7 @@
 
         function addPocket(subject) {
             var data = {subject: subject};
-            vm.data.push({data: data});
+            vm.data.unshift({data: data});
         }
 
         function removePocket(index) {
