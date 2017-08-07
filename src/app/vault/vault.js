@@ -22,17 +22,15 @@
         activate();
 
         function loadData() {
-            logger.info('loading...');
             AuthService.loadPockets(Session.getPassword()).then(pockets => {
                 $scope.$apply(function () {
+                    logger.success('Loading complete');
                     vm.data = pockets;
                 });
-                logger.success('loading complete.');
             });
         }
 
         function saveData() {
-            logger.info('saving...');
             AuthService.savePockets(vm.data, Session.getPassword()).then(() => {
                 logger.success('Saving complete.');
                 loadData();
@@ -60,7 +58,7 @@
 /*            Using a resolver on all routes or dataservice.ready in every controller */
 /*            return dataservice.ready(promises).then(function(){ */
             loadData();
-            logger.info('Activated Vault View');
+//            logger.info('Activated Vault View');
         }
     }
 })();
