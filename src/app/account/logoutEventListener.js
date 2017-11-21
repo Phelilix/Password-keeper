@@ -11,7 +11,6 @@
         $rootScope.$on('auth-logout', function () {
             Session.destroy();
             $location.path('/login');
-            logger.info('logoutListener was here');
         });
     }
     

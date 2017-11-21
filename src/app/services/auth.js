@@ -17,7 +17,7 @@
         const textFormat = 'utf8';
         const cryptedFormat = 'hex';
         const saltSize = 16;
-        const iterations = 100000;
+        const iterations = 5000;
         const keylength = 512;
 
 
@@ -127,10 +127,10 @@
         }
 
         function changePassword(pass, newPass) {
-            return $q.all({
-                salt: randomHexString(saltSize),
-                savedDigest: fetchCurrentDigest()
-            }).then((parts) => {
+            return Promise.resolve({})
+                    .then(parts => randomHexString(saltSize).then(salt => {parts.salt = salt; return parts;}))
+                    .then(parts => fetchCurrentDigest().then(x => {parts.savedDigest = x; return parts;}))
+                    .then(parts => {
                 return $q.all({
                     isLoggedIn: verifyPass(pass, parts.savedDigest.salt),
                     digest: pbkdf2Hex(newPass, parts.salt, iterations, keylength, digest)
@@ -144,8 +144,6 @@
                             });
 
                 });
-            }, function (rejectReason) {
-                console.log(rejectReason);
             });
             function saveJSON(information) {
                 fs.writeFileSync(location, JSON.stringify(information));

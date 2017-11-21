@@ -14,11 +14,11 @@
                               ng-submit="vm.changePass(vm.password)" novalidate>
 
                             <label for="password">Password:</label>
-                            <input type="password" id="password" ng-change="vm.updateIsPassEqual()"
+                            <input ng-disabled="vm.isBusy" type="password" id="password" ng-change="vm.updateIsPassEqual()"
                                    ng-model="vm.password"><br>
 
                             <label for="confirmation">Confirmation:</label>
-                            <input type="password" id="confirmation" ng-change="vm.updateIsPassEqual()"
+                            <input ng-disabled="vm.isBusy" type="password" id="confirmation" ng-change="vm.updateIsPassEqual()"
                                    ng-model="vm.confirmation"><br>
 
                             <input ng-show="vm.isPassEqual" ng-disabled="!vm.isPassEqual" type="submit" value="Submit"><br>

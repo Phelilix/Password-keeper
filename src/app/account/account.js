@@ -26,7 +26,6 @@
             /*Using a resolver on all routes or dataservice.ready in every controller*/
             /*return dataservice.ready(promises).then(function(){*/
             return $q.all(promises).then(function () {
-                logger.info('Activated Account View');
             });
         }
 
@@ -34,13 +33,12 @@
             SpinnerService.showFor(
                 AuthService.changePassword(vm.oldPassword, vm.password.password).then(function(){
                     logger.success('changed password');
-                    $location.path('/login');
                 }, function(){
                     logger.info('could not change password.');
                 }),
                 $scope,
                 vm
-            );
+            ).then($location.path('/login'));
         }
 
         function isPasswordEqualToConfirmation() {

@@ -5,8 +5,8 @@
             .module('app.auth')
             .controller('NewUserController', NewUserController);
 
-    NewUserController.$inject = ['AuthService', 'logger', '$location', '$scope'];
-    function NewUserController(AuthService, logger, $location, $scope) {
+    NewUserController.$inject = ['AuthService', 'logger', '$location', '$scope', 'SpinnerService'];
+    function NewUserController(AuthService, logger, $location, $scope, SpinnerService) {
         var vm = this;
         vm.title = '(re)creating user account';
         vm.updateIsPassEqual = isPasswordEqualToConfirmation;
@@ -14,13 +14,17 @@
         vm.changePass = changePass;
         vm.password = '';
         vm.confirmation = '';
+        vm.isBusy = false;
         
         function changePass(pass){
-            AuthService.createNewUser(pass).then(() => {
-                $scope.$apply($location.path('/'));
-            },() => {
-                logger.error('An unexpected error happened while attempting to change password.');
-            });
+            SpinnerService.showFor(
+                AuthService.createNewUser(pass).then(() => {
+                    $location.path('/');
+                },() => {
+                    logger.error('An unexpected error happened while attempting to change password.');
+                }),
+                $scope,
+                vm);
         }
 
         function isPasswordEqualToConfirmation() {

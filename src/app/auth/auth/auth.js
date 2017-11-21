@@ -32,7 +32,7 @@
 
         function redirectIfNeededInThisCase() {
             if (!AuthService.passwordFileExists()) {
-                /*$scope.$apply(*/$location.path('/newuser')/*)*/;
+                $location.path('/newuser');
             }
         }
     }

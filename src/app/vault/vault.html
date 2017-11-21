@@ -1,32 +1,127 @@
 ﻿<style>
-    .hideWhenHover:hover {
+    .hideWhenHover:active {
         color: inherit;
     }
     .hideWhenHover {
         color: transparent;
     }
+    .add-to-pocket {
+        background-color: #ffffe5;
+    }
+    .pocket {
+        border: 1px solid #000000;
+        margin: 5px;
+        display: inline-block;
+    }
+    .data {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 5px;
+    }
+    .heading-data {
+        font-weight: bold;
+        text-align: center;
+    }
+    .heading-data * {
+        border-width: 0 !important;
+    }
+    .pocketLabel {
+        text-align: center;
+    }
+    .navbar-vault {
+        margin-left: 230px;
+        margin-right: 130px;
+        background: none !important;
+        border-bottom-width: 0px;
+    }
+    .navbar-vault li {
+        text-align:center;
+    }
+    Input[type='image'] {
+        border: 0px !important;
+        vertical-align: middle;
+        height: 30px;
+    }
 </style>
 <section class="mainbar">
     <section class="matter">
         <div class="container">
-            <div class="row">
+            <div class="password-keeper-row">
                 <div class="widget wblue">
                     <div class="widget-content user">
                         <div data-cc-widget-header title="{{vm.title}}"></div>
-                        <input type="button" value="save" name="savePockets" ng-click="vm.saveData();"/>
-                        <table>
-                            <tbody style="border-bottom: 1px solid #000000"><tr><td>subject</td><td><input ng-model="subject"/></td><td><input type="image" src="architecture/design/content/images/add.png" value="add" name="addPocket" ng-click="vm.addPocket(subject); subject = '';"/></td></tr></tbody>
-                            
-                            <tbody ng-model='vm.data' ng-repeat="item in vm.data track by $index">
-                                <tr><th class='text-center' colspan="2" >{{item.data.subject}}</th><td><input type="image" src="architecture/design/content/images/remove.png" value="remove" name="removePocket" ng-click="vm.removePocket($index, newItem, newValue);"/></td></tr>
-                                <tr ng-repeat='(key, value) in item.data track by $index'>
-                                    <td>{{key}}</td>
-                                    <td class='hideWhenHover'><input ng-model="item.data[key]"/></td>
-                                    <td><input type="image" src="architecture/design/content/images/remove.png" value="remove" name="removeItem" ng-click="vm.removeItem($parent.$index, key);"/></td>
+                        <nav class="navbar-vault navbar navbar-default navbar-fixed-top"> 
+                            <div class="container-fluid">
+                                <div class="navbar-header"> 
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> 
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span> 
+                                        <span class="icon-bar"></span> 
+                                        <span class="icon-bar"></span> 
+                                    </button> 
+                                </div> 
+                                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-6" aria-expanded="false" style="height: 1px;"> 
+                                    <ul class="nav navbar-nav"> 
+                                        <li>
+                                            <label for="enableEditing"><input type="checkbox" id="enableEditing" ng-model="vm.isEditEnabled"/>Enable editing</label>
+                                        </li>
+                                        <li ng-if="vm.isEditEnabled">
+                                            <input type="button" value="save" name="savePockets" ng-click="vm.saveData();"/>
+                                        </li>
+                                        <li ng-if="vm.isEditEnabled" >new pocket <input class="add-to-pocket" placeholder="my pocket-name #1" ng-model="pocketLabel"/>
+                                            <input type="image" src="architecture/design/content/images/add.png" value="add" name="addPocket" 
+                                                   ng-click="vm.addPocket(pocketLabel); pocketLabel = '';"
+                                                   />
+                                        </li>
+                                        <li>
+                                            <input type="text" ng-model="vm.filterPocketLabel" placeholder="filter pockets"/>
+                                        </li>
+                                        <li>
+                                            <input type="text" ng-model="vm.filterAccountLabel" placeholder="filter accounts"/>
+                                        </li>
+                                    </ul>
+                                </div> 
+                            </div> 
+                        </nav>
+                        <div ng-model='vm.pockets' class="pocket" ng-repeat="pocket in vm.pockets| filter: {data: {label: vm.filterPocketLabel}}: false track by $index ">
+                            <table >
+                                <caption class="heading-data">
+                                    <input class="pocketLabel" ng-model="pocket.data.label"/><input ng-if="vm.isEditEnabled" type="image" src="architecture/design/content/images/remove.png" value="remove" name="removePocket" ng-click="vm.removePocket(pocket);"/>
+                                </caption>
+                                <!-- The displayed accounts -->
+                                <tr class="password-keeper-row" ng-repeat='account in pocket.data.contents| filterOR: {label: vm.filterAccountLabel, webLocation: vm.filterAccountLabel} track by $index '>
+                                    <td class="data cells-3">
+                                        <input ng-disabled="!vm.isEditEnabled" ng-model="account.label"/>
+                                        <br>
+                                        <input ng-disabled="!vm.isEditEnabled" ng-model="account.webLocation"/>
+                                    </td>
+                                    <td class="data cells-3 hideWhenHover">
+                                        <input ng-disabled="!vm.isEditEnabled" ng-model="account.contents.username"/>
+                                        <br>
+                                        <input ng-disabled="!vm.isEditEnabled" ng-model="account.contents.password"/>
+                                    </td>
+                                    <td ng-if="vm.isEditEnabled" class="data cells-3"><input type="image" src="architecture/design/content/images/remove.png" value="remove" name="removeItem" ng-click="vm.removeItem(pocket, account);"/></td>
                                 </tr>
-                                <tr><td><input ng-model="newItem"/></td><td><input ng-model="newValue"/></td><td><input type="image" src="architecture/design/content/images/add.png" value="add" name="addItem" ng-click="vm.addItem($index, newItem, newValue); newValue = ''; newItem = '';"/></td></tr>
-                            </tbody>
-                        </table>
+                                <!-- Form for adding a new account -->
+                                <tr class="password-keeper-row" ng-if="vm.isEditEnabled">
+                                    <td class="data cells-3">
+                                        <input class="add-to-pocket" placeholder="label for value" ng-model="label"/>
+                                        <br/>
+                                        <input class="add-to-pocket" placeholder="weblocation for account" ng-model="weblocation"
+                                    </td>
+                                    <td class="data cells-3">
+                                        <input class="add-to-pocket" placeholder="identification" ng-model="newValue.username"/>
+                                        <br/>
+                                        <input type='password' class="add-to-pocket" placeholder="password" ng-model="newValue.password"/>
+                                    </td>
+                                    <td class="data cells-3">
+                                        <input type="image" src="architecture/design/content/images/add.png" value="add" name="addItem" 
+                                               ng-click="vm.addItem(pocket, label, newValue, weblocation); newValue = {}; label = ''; weblocation = '';"
+                                               />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                     <div class="widget-foot">
                         <div class="clearfix"></div>
